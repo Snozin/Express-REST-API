@@ -1,5 +1,5 @@
-const {Router} =  require('express')
-const router =  Router()
+// const {Router} =  require('express')
+const router =  require("express").Router()
 
 router.get("/cosa", (req, res) =>{
     // res.send("Hola people")

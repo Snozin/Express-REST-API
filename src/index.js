@@ -14,7 +14,8 @@ app.use(express.json())
 app.use(express.urlencoded( {extended:false} ))
 
 // routes
-app.use(require("./routes/index"))
+app.use(require("./routes/main"))
+app.use(require("./routes/upload"))
 
 // starting the server
 app.listen(app.get("port"), ()=>{
