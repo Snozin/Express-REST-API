@@ -9,31 +9,35 @@ router.post("/upload", (req, res)=> {
     }
 
     let file = req.files.foto //foto debe ser el campo nombre del input field en el form
+    
+    // console.log("Me enviaron " + req.files.foto.name);
+    // console.log("Me enviaron " + req.files.OtraFoto.name);
+    // res.send("Toy haciendo cosas")
 
     file.mv(`../subidas/${file.name}`, err => {
         if (err) {
             console.log(err)
             return res.status(500).send({
-                message : "no se ha podido guardar"
+                message : `Error al guardar: ${err}`
             })
         }
 
         return res.status(200).send({
-            message : "Archivo guardado"
+            message : "Archivo subido."
         })
     })
     
 })
 
-router.get("/upload", (req, res)=>{
-    // TODO: descargar fichero
-    res.send("aqui tu ficherito locuelo")
+// router.get("/upload", (req, res)=>{
+//     // TODO: descargar fichero
+//     res.send("aqui tu ficherito locuelo")
 
-    // let file = __dirname + " ../../../../subidas/carnet.png"
+//     // let file = __dirname + " ../../../../subidas/carnet.png"
 
-    // res.download(file)
-    // console.log("envio: " + __dirname + " ../../../subidas/carnet.png")
-})
+//     // res.download(file)
+//     // console.log("envio: " + __dirname + " ../../../subidas/carnet.png")
+// })
 
 
 module.exports = router

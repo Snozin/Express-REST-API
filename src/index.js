@@ -1,29 +1,25 @@
-const express = require ('express');
+require('dotenv/config')
+const express = require ('express')
+const morgan = require('morgan')
+const cors = require('cors')
+
 const app = express()
 
-const morgan = require('morgan');
-
-
-// settings
+// Settings
 app.set("port", process.env.PORT || 1414)
 app.set("json spaces", 2)
 
-// middlewares
+// Middlewares
 app.use(morgan('dev'))
 app.use(express.json())
-app.use(express.urlencoded( {extended:false} ))
+app.use(cors())
+// app.use(express.urlencoded( {extended:false} ))
 
-// routes
+// Routes
 app.use(require("./routes/main"))
 app.use(require("./routes/upload"))
 
-// starting the server
+// Server
 app.listen(app.get("port"), ()=>{
     console.log(`Server listening on port ${app.get("port")}`)
 })
-
-// app.get("/", (req, res) =>{
-//     res.send("Hola mundo")
-// })
-
-// app.listen(app.get("port"))
