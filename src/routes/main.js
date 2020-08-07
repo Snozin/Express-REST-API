@@ -1,26 +1,27 @@
-// const {Router} =  require('express')
 const router =  require("express").Router()
-
-// router.get("/", (req, res) => {
-    // res.send("Hola people")
-    // const data = {
-        // "name" : "MoD",
-        // "email" : "mail@mail.com"
-    // }
-    
-    // res.json(data)
-// })
-
+const path = require('path')
 
 router.get("/", (req, res) => { 
     // TODO: descargar fichero
+        // let file = __dirname + " ../../../../subidas/carnet.png"
+        // res.download(file)
+        // console.log("envio: " + __dirname + " ../../../subidas/carnet.png")
+
+    const fs = require('fs')
+
+    function preba() {
+        // const path = require('path')
+
+        // require('dotenv/config')
+        // const storage = process.env.STORAGE
+
+        // return path 
+        // return await fs.promises.opendir(__dirname + " ../../../../subidas")
+    }
+    console.log(__dirname)
+
     // res.send("Te respuendo")
-    res.send("Te respuendo")
-
-    // let file = __dirname + " ../../../../subidas/carnet.png"
-
-    // res.download(file)
-    // console.log("envio: " + __dirname + " ../../../subidas/carnet.png")
+    res.sendFile(path.join(__dirname + "/plantillaSubida.html"))
 })
 
 module.exports = router;
