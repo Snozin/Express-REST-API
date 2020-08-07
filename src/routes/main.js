@@ -8,21 +8,18 @@ router.get("/", async (req, res) => {
         // res.download(file)
         // console.log("envio: " + __dirname + " ../../../subidas/carnet.png")
 
-    const getFiles = async()=> {
-        const dir = await fs.promises.opendir(storage)
-        const output = []
+    const dir = await fs.promises.opendir(storage)
+    const output = []
 
-        for await(const element of dir) {
-            output.push({
-                name : element.name,
-                isFile : element.isFile()
-            }) 
-        }
-        return output
+    for await(const element of dir) {
+        output.push({
+            name : element.name,
+            isFile : element.isFile()
+        }) 
     }
     
     console.log("El almacen esta en: " + storage)
-    res.send(await getFiles())
+    res.send(output)
 })
 
 module.exports = router;
