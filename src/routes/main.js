@@ -1,27 +1,28 @@
 const router =  require("express").Router()
-const path = require('path')
+const storage = require("../libs/storage")
+const fs = require('fs')
 
-router.get("/", (req, res) => { 
+router.get("/", async (req, res) => { 
     // TODO: descargar fichero
         // let file = __dirname + " ../../../../subidas/carnet.png"
         // res.download(file)
         // console.log("envio: " + __dirname + " ../../../subidas/carnet.png")
 
-    const fs = require('fs')
+    const getFiles = async()=> {
+        const dir = await fs.promises.opendir(storage)
+        const output = []
 
-    function preba() {
-        // const path = require('path')
-
-        // require('dotenv/config')
-        // const storage = process.env.STORAGE
-
-        // return path 
-        // return await fs.promises.opendir(__dirname + " ../../../../subidas")
+        for await(const element of dir) {
+            output.push({
+                name : element.name,
+                isFile : element.isFile()
+            }) 
+        }
+        return output
     }
-    console.log(__dirname)
-
-    // res.send("Te respuendo")
-    res.sendFile(path.join(__dirname + "/plantillaSubida.html"))
+    
+    console.log("El almacen esta en: " + storage)
+    res.send(await getFiles())
 })
 
 module.exports = router;

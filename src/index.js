@@ -1,4 +1,4 @@
-require('dotenv/config')
+require('dotenv').config()
 const express = require ('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -6,7 +6,7 @@ const cors = require('cors')
 const app = express()
 
 // Settings
-app.set("port", process.env.PORT || 1414)
+app.set("port", process.env.PORT)
 app.set("json spaces", 2)
 
 // Middlewares

@@ -1,9 +1,13 @@
 const router =  require("express").Router()
-require('dotenv/config')
-const storage = process.env.STORAGE
+const path = require('path')
+const storage = require("../libs/storage")
 const fileupload = require("express-fileupload")
 
 router.use(fileupload())
+
+router.get("/upload", (req, res)=>{
+    res.sendFile(path.join(__dirname + "/plantillaSubida.html"))
+})
 
 router.post("/upload", (req, res)=> {
     if(!req.files || Object.keys(req.files).length === 0) {
@@ -14,7 +18,6 @@ router.post("/upload", (req, res)=> {
     
     // console.log("Me enviaron " + req.files.foto.name);
     // console.log("Me enviaron " + req.files.OtraFoto.name);
-    // res.send("Toy haciendo cosas")
 
     file.mv(`${storage}/${file.name}`, err => {
         if (err) {
