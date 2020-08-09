@@ -1,13 +1,10 @@
 const router =  require("express").Router()
 const storage = require("../libs/storage")
+const path = require("path")
 const fs = require('fs')
 
+// Main path
 router.get("/", async (req, res) => { 
-    // TODO: descargar fichero
-        // let file = __dirname + " ../../../../subidas/carnet.png"
-        // res.download(file)
-        // console.log("envio: " + __dirname + " ../../../subidas/carnet.png")
-
     const dir = await fs.promises.opendir(storage)
     const output = []
 
@@ -19,7 +16,14 @@ router.get("/", async (req, res) => {
     }
     
     console.log("El almacen esta en: " + storage)
-    res.send(output)
+    res.sendFile(path.join(__dirname + "/plantillaSubida.html"))
+    // res.send(output)
+})
+
+// Descarga de ficheros
+router.get("/:name", async (req, res)=>{
+        let file = storage + "/" + req.params.name 
+        res.download(file)
 })
 
 module.exports = router;
