@@ -1,12 +1,11 @@
 const router =  require("express").Router()
-const path = require('path')
 const storage = require("../libs/storage")
 const fileupload = require("express-fileupload")
 
 router.use(fileupload())
 
 router.get("/upload", (req, res)=>{
-    res.sendFile(path.join(__dirname + "/plantillaSubida.html"))
+    res.sendFile(__dirname + "/plantillaSubida.html")
 })
 
 router.post("/upload", (req, res)=> {
